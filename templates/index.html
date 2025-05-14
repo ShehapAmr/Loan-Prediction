@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Prediction</title>
+</head>
+<body>
+    <h1>Loan Approval Prediction</h1>
+    <form action="{{ url_for('predict') }}" method="post">
+        <input type="text" name="Gender" placeholder="Male or Female" required><br>
+        <input type="text" name="Married" placeholder="Yes or No" required><br>
+        <input type="text" name="Dependents" placeholder="0 / 1 / 2 / 3+" required><br>
+        <input type="text" name="Education" placeholder="Graduate / Not Graduate" required><br>
+        <input type="text" name="Self_Employed" placeholder="Yes or No" required><br>
+        <input type="number" step="any" name="ApplicantIncome" placeholder="Applicant Income" required><br>
+        <input type="number" step="any" name="CoApplicantIncome" placeholder="Coapplicant Income" required><br>
+        <input type="number" step="any" name="LoanAmount" placeholder="Loan Amount" required><br>
+        <input type="number" step="any" name="Loan_Amount_Term" placeholder="Loan Amount Term" required><br>
+        <input type="number" step="any" name="Credit_History" placeholder="1 or 0" required><br>
+        <input type="text" name="Property_Area" placeholder="Urban / Rural / Semiurban" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <h2>{{ prediction_text }}</h2>
+    {% endif %}
+</body>
+</html>
