@@ -18,7 +18,7 @@ columns = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Te
 def home():
     return render_template("index.html")
 
-@app.route("https://loan-prediction-production.up.railway.app/predict", methods=["POST"])
+@app.route("/predict", methods=["POST"])
 def predict():
     # Get form data
     data = request.form
