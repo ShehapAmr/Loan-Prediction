@@ -59,7 +59,7 @@ def predict():
     prediction = model.predict(df)[0]
     status = "Approved" if prediction == 1 else "Rejected"
 
-    return {status}
+    return {"status": status}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
