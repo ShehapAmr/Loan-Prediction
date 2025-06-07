@@ -18,7 +18,7 @@ columns = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Te
 def home():
     return render_template("index.html")
 
-@app.route("/predict", methods=["POST"])
+@app.route("https://loan-prediction-production.up.railway.app/predict", methods=["POST"])
 def predict():
     # Get form data
     data = request.form
@@ -59,7 +59,7 @@ def predict():
     prediction = model.predict(df)[0]
     status = "Approved" if prediction == 1 else "Rejected"
 
-    return render_template("index.html", prediction_text=f"Your Loan is: {status}")
+    return {status}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
