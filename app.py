@@ -1,5 +1,5 @@
 import numpy as np
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import pickle
 import pandas as pd
 
@@ -21,22 +21,26 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     # Get form data
-    data = request.form
+    if request.is_json:
+        data = request.get_json()
+    else:
+        data = request.form
 
     # Raw input
     raw_input = {
-        'Gender': data['Gender'],
-        'Married': data['Married'],
-        'Dependents': data['Dependents'],
-        'Education': data['Education'],
-        'Self_Employed': data['Self_Employed'],
-        'ApplicantIncome': float(data['ApplicantIncome']),
-        'CoapplicantIncome': float(data['CoApplicantIncome']),
-        'LoanAmount': float(data['LoanAmount']),
-        'Loan_Amount_Term': float(data['Loan_Amount_Term']),
-        'Credit_History': float(data['Credit_History']),
-        'Property_Area': data['Property_Area']
-    }
+    'Gender': data['Gender'],
+    'Married': data['Married'],
+    'Dependents': data['Dependents'],
+    'Education': data['Education'],
+    'Self_Employed': data['Self_Employed'],
+    'ApplicantIncome': float(data['ApplicantIncome']),
+    'CoapplicantIncome': float(data['CoApplicantIncome']),
+    'LoanAmount': float(data['LoanAmount']),
+    'Loan_Amount_Term': float(data['Loan_Amount_Term']),
+    'Credit_History': float(data['Credit_History']),
+    'Property_Area': data['Property_Area']
+}
+
 
     # DataFrame with single row
     df = pd.DataFrame([raw_input])
